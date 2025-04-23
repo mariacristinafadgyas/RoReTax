@@ -1,0 +1,199 @@
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    text-align: left;
+    margin: 50px;
+    background-color: #f4f4f9;
+}
+
+/* Main container */
+.container {
+    max-width: 1208px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Rental income form styling */
+.rent-income-form {
+    display: flex;
+    width: 300px; /* This width is now consistent */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+/* Rental form label styling */
+.rent-income-form label {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-align: left;
+    color: #003366;
+}
+
+/* Rental income form inputs */
+.rent-income-form input,
+.rent-income-form select {
+    width: 300px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f0f8ff;
+}
+
+/* Rental form input focus */
+.rent-income-form input:focus,
+.rent-income-form select:focus {
+    outline: none;
+    border-color: #003366;
+    background-color: #e6f7ff;
+}
+
+/* Rental income form button */
+.rent-income-form button {
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #003366;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    gap: 20px;
+}
+
+.rent-income-form button:hover {
+    background-color: #005bb5;
+}
+
+/* Result box styling */
+.result {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    background: linear-gradient(
+        to bottom,
+        #005bb5,
+        #003366
+    ); /* Gradient effect */
+    color: #ffffff; /* Text stands out better */
+    display: none; /* Initially hidden */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Modern shadow */
+    text-align: left;
+}
+
+/* Result content boxes styling */
+.result .amount-box {
+    display: inline-block;
+    padding: 12px 16px;
+    margin: 8px;
+    background: rgba(255, 255, 255, 0.2); /* Slight transparency */
+    color: #ffffff;
+    border-radius: 8px;
+    font-weight: normal;
+    text-align: left;
+    font-size: 1em;
+    min-width: 150px; /* Ensure box isn't too narrow */
+}
+
+/* Show the result box when the calculate button is clicked */
+.result.show {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Optional: Add a small animation for when the result box appears */
+.result.show {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Contact form styling */
+.contact-form {
+    margin-top: 40px;
+    padding: 25px;
+    border-radius: 8px;
+    width: 550px;
+    background-color: #003366;
+    color: white;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Contact form labels */
+.contact-form label {
+    color: #ffffff;
+    font-size: 0.85em;
+}
+
+/* Contact form inputs */
+.contact-form input,
+.contact-form textarea {
+    width: 500px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #ffffff;
+    color: #003366;
+}
+
+/* Contact form button */
+.contact-form button {
+    width: 30%;
+    background-color: #ffcc00;
+    color: #003366;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.contact-form button:hover {
+    background-color: #ffaa00;
+}
+
+/* Animation for fade-in effect */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .rent-income-form {
+        width: 100%;
+    }
+
+    .rent-income-form button,
+    .contact-form button {
+        width: 100%;
+    }
+
+    .result {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .result .amount-box {
+        min-width: 120px;
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
