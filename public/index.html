@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Rental Tax Calculator</title>
+        <link rel="stylesheet" href="/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <h2>Rental Tax Calculator</h2>
+
+            <p>
+                Use this calculator to estimate the tax you owe on your rental
+                income. Our tool helps you anticipate costs associated with
+                property taxation, providing clarity and transparency to make
+                informed financial decisions.
+            </p>
+            <div class="rent-income-form">
+                <label for="year">Select Year:</label>
+                <select id="year">
+                    <option value="2025">2025</option>
+                    <option value="2024">2024</option>
+                    <option value="2023">2023</option>
+                    <option value="2022">2022</option>
+                    <option value="2021">2021</option>
+                    <option value="2020">2020</option>
+                </select>
+
+                <label for="rentIncome"
+                    >Enter Rental Income (Lei) per Month:</label
+                >
+                <input
+                    type="number"
+                    id="rentIncome"
+                    placeholder="Enter amount"
+                    required
+                />
+
+                <button onclick="calculateTax()">Calculate Tax</button>
+            </div>
+
+            <div class="result" id="taxResult"></div>
+
+            <h3>Important Legal Notice:</h3>
+            <p>
+                In the situation where the tenant is a legal entity or another
+                entity that is required to maintain accounting records
+                (self-employed person, individual enterprise, family business,
+                etc.), they are also obligated to withhold and pay to the state
+                budget a 10% tax on the net income for each rent payment.
+            </p>
+
+            <h3>Have Questions? Contact Us!</h3>
+            <form class="contact-form" id="contact-form">
+                <label for="name">Your Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your name"
+                    required
+                />
+
+                <label for="email">Your Email:</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required
+                />
+
+                <label for="message">Your Question:</label>
+                <textarea
+                    id="message"
+                    name="message"
+                    placeholder="Enter your question"
+                    required
+                ></textarea>
+
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+
+        <script src="main.js"></script>
+    </body>
+</html>
