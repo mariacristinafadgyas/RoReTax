@@ -17,6 +17,30 @@ body {
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Ensure header items are aligned left and right */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Pushes h2 left & box right */
+    width: 100%;
+    padding-bottom: 20px; /* Adds space to prevent overlap */
+}
+
+/* Adjust the title position */
+.header-container h2 {
+    margin: 0; /* Removes unnecessary spacing */
+    font-size: 1.8em; /* Adjust size for better balance */
+    color: #003366;
+}
+
+/* Currency exchange box styling */
+.currency-box {
+    width: 200px;
+    height: 95px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
 /* Rental income form styling */
 .rent-income-form {
     display: flex;
