@@ -12,31 +12,35 @@ function calculateTax() {
   }
 
   let taxRate = 0;
-  let deduction = 0;
+  let deductionPercentage = 0;
   let minimumBrutoSalary = 0;
   let healthTax = 0;
 
   // Define tax rates, deductions, and minimum salary per year
   const taxSettings = {
-    2025: { taxRate: 10, deduction: 0.2, minimumBrutoSalary: 4050 },
-    2024: { taxRate: 10, deduction: 0.2, minimumBrutoSalary: 3300 },
-    2023: { taxRate: 10, deduction: 0, minimumBrutoSalary: 3000 },
-    2022: { taxRate: 6, deduction: 0, minimumBrutoSalary: 3060 },
-    2021: { taxRate: 6, deduction: 0, minimumBrutoSalary: 2760 },
-    2020: { taxRate: 6, deduction: 0, minimumBrutoSalary: 2676 },
+    2025: { taxRate: 10, deductionPercentage: 0.2, minimumBrutoSalary: 4050 },
+    2024: { taxRate: 10, deductionPercentage: 0.2, minimumBrutoSalary: 3300 },
+    2023: { taxRate: 10, deductionPercentage: 0, minimumBrutoSalary: 3000 },
+    2022: { taxRate: 6, deductionPercentage: 0, minimumBrutoSalary: 3060 },
+    2021: { taxRate: 6, deductionPercentage: 0, minimumBrutoSalary: 2760 },
+    2020: { taxRate: 6, deductionPercentage: 0, minimumBrutoSalary: 2676 },
   };
 
   if (taxSettings[year]) {
     taxRate = taxSettings[year].taxRate;
-    deduction = rentIncomePerMonth * taxSettings[year].deduction;
+    deductionPercentage = taxSettings[year].deductionPercentage;
     minimumBrutoSalary = taxSettings[year].minimumBrutoSalary;
   }
 
   // Calculate gross yearly income (before deductions)
   let grossYearlyIncome = rentIncomePerMonth * 12;
 
+  // Calculate deduction amount
+  let deductionAmountPerMonth = rentIncomePerMonth * deductionPercentage;
+  let deductionAmountPerYear = deductionAmountPerMonth * 12;
+
   // Calculate taxable yearly income (after deductions)
-  let taxableIncomePerYear = grossYearlyIncome - deduction * 12;
+  let taxableIncomePerYear = grossYearlyIncome - deductionAmountPerYear;
   let taxAmountPerYear = (taxableIncomePerYear * taxRate) / 100;
   let taxAmountPerMonth = taxAmountPerYear / 12;
 
@@ -60,7 +64,6 @@ function calculateTax() {
       healthTax = (minimumBrutoSalary * 24 * 10) / 100;
     }
   } else {
-    // Until 2022, health tax applies only if yearly rental income exceeds 12 * minimum salary
     let healthTaxComparisonValue = minimumBrutoSalary * 12;
     if (taxableIncomePerYear > healthTaxComparisonValue) {
       healthTax = (minimumBrutoSalary * 12 * 10) / 100;
@@ -69,13 +72,15 @@ function calculateTax() {
 
   let healthTaxPerMonth = healthTax / 12;
 
-  // Calculate net yearly and monthly income
-  let netAmountPerYear = taxableIncomePerYear - taxAmountPerYear - healthTax;
+  // ✅ Fix Net Income Calculation
+  let netAmountPerYear = grossYearlyIncome - taxAmountPerYear - healthTax;
   let netAmountPerMonth = netAmountPerYear / 12;
 
   // Display results
   document.getElementById("taxResult").innerHTML = `
         <div>Gross Yearly Income: <span class="amount-box">${grossYearlyIncome.toFixed(2)}</span> Lei</div>
+        <div>Yearly Deduction: <span class="amount-box">${deductionAmountPerYear.toFixed(2)}</span> Lei</div>
+        <div>Yearly Taxable Income: <span class="amount-box">${taxableIncomePerYear.toFixed(2)}</span> Lei</div>
         <div>Yearly Tax Amount: <span class="amount-box">${taxAmountPerYear.toFixed(2)}</span> Lei</div>
         <div>Monthly Tax Amount: <span class="amount-box">${taxAmountPerMonth.toFixed(2)}</span> Lei</div>
         <div>Yearly CASS Contributions (Health Tax): <span class="amount-box">${healthTax.toFixed(2)}</span> Lei</div>
