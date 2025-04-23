@@ -32,12 +32,16 @@ function calculateTax() {
     minimumBrutoSalary = taxSettings[year].minimumBrutoSalary;
   }
 
-  // Calculate taxable income per year
-  let taxableIncomePerYear = (rentIncomePerMonth - deduction) * 12;
-  let taxAmount = (taxableIncomePerYear * taxRate) / 100;
+  // Calculate gross yearly income (before deductions)
+  let grossYearlyIncome = rentIncomePerMonth * 12;
+
+  // Calculate taxable yearly income (after deductions)
+  let taxableIncomePerYear = grossYearlyIncome - deduction * 12;
+  let taxAmountPerYear = (taxableIncomePerYear * taxRate) / 100;
+  let taxAmountPerMonth = taxAmountPerYear / 12;
 
   // Health tax calculation: Apply only if annual income exceeds minimum thresholds
-  if (year >= "2023") {
+  if (year >= 2023) {
     let healthTaxComparisonMin = minimumBrutoSalary * 6;
     let healthTaxComparisonMed = minimumBrutoSalary * 12;
     let healthTaxComparisonMax = minimumBrutoSalary * 24;
@@ -63,14 +67,19 @@ function calculateTax() {
     }
   }
 
+  let healthTaxPerMonth = healthTax / 12;
+
   // Calculate net yearly and monthly income
-  let netAmountPerYear = taxableIncomePerYear - taxAmount - healthTax;
+  let netAmountPerYear = taxableIncomePerYear - taxAmountPerYear - healthTax;
   let netAmountPerMonth = netAmountPerYear / 12;
 
   // Display results
   document.getElementById("taxResult").innerHTML = `
-        <div>Yearly Tax Amount: <span class="amount-box">${taxAmount.toFixed(2)}</span> Lei</div>
-        <div>Yearly CASS contributions (Health Tax): <span class="amount-box">${healthTax.toFixed(2)}</span> Lei</div>
+        <div>Gross Yearly Income: <span class="amount-box">${grossYearlyIncome.toFixed(2)}</span> Lei</div>
+        <div>Yearly Tax Amount: <span class="amount-box">${taxAmountPerYear.toFixed(2)}</span> Lei</div>
+        <div>Monthly Tax Amount: <span class="amount-box">${taxAmountPerMonth.toFixed(2)}</span> Lei</div>
+        <div>Yearly CASS Contributions (Health Tax): <span class="amount-box">${healthTax.toFixed(2)}</span> Lei</div>
+        <div>Monthly CASS Contributions (Health Tax): <span class="amount-box">${healthTaxPerMonth.toFixed(2)}</span> Lei</div>
         <div>Net Yearly Income: <span class="amount-box">${netAmountPerYear.toFixed(2)}</span> Lei</div>
         <div>Net Monthly Income: <span class="amount-box">${netAmountPerMonth.toFixed(2)}</span> Lei</div>
     `;
